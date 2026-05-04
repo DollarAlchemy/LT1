@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>தமிழ் — Learn Tamil</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fdf8f3;
+  --cream-dark: #f5ede0;
+  --saffron: #e8830a;
+  --saffron-light: #fff4e0;
+  --saffron-dark: #b56208;
+  --terra: #c0432a;
+  --terra-light: #fdeee9;
+  --terra-dark: #8f2f1c;
+  --teal: #1a8a7a;
+  --teal-light: #e0f5f2;
+  --teal-dark: #116658;
+  --gold: #d4a017;
+  --gold-light: #fdf4da;
+  --plum: #7a3fa0;
+  --plum-light: #f2e8fa;
+  --text: #281e14;
+  --text-mid: #6b5a48;
+  --text-dim: #a8917a;
+  --border: #e8d8c4;
+  --border-strong: #d4c0a8;
+  --correct: #2a9e68;
+  --correct-bg: #e4f7ee;
+  --wrong: #d44040;
+  --wrong-bg: #fceaea;
+  --shadow-sm: 0 2px 8px rgba(60,30,10,0.08);
+  --shadow-md: 0 4px 18px rgba(60,30,10,0.12);
+  --shadow-lg: 0 8px 32px rgba(60,30,10,0.15);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --font: 'Nunito', sans-serif;
+  --font-tamil: 'Noto Sans Tamil', 'Latha', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: var(--font);
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(232,131,10,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(192,67,42,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(26,138,122,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#app { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 16px 16px 80px; }
+
+/* ── HEADER ── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 20px;
+}
+.app-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.app-logo-tamil {
+  font-family: var(--font-tamil);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--saffron);
+  letter-spacing: 0.02em;
+}
+.app-logo-en {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--saffron-light);
+  border: 1.5px solid #f5c86a;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--saffron-dark);
+}
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HOME ── */
+.home-hero {
+  background: linear-gradient(135deg, #c0432a 0%, #e8830a 100%);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px 28px 28px;
+  color: white;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.home-hero::before {
+  content: 'தமிழ்';
+  font-family: var(--font-tamil);
+  position: absolute;
+  right: -8px; top: 8px;
+  font-size: 5rem;
+  opacity: 0.12;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+.hero-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; }
+.hero-title-tamil {
+  font-family: var(--font-tamil);
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+.hero-sub { font-size: 0.9rem; opacity: 0.8; font-weight: 600; }
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.mode-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 14px;
+  cursor: pointer;
+  transition: all 0.18s;
+  box-shadow: var(--shadow-sm);
+}
+.mode-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--saffron); }
+.mode-card:active { transform: scale(0.97); }
+.mode-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+.mode-name { font-size: 0.92rem; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.mode-desc { font-size: 0.76rem; color: var(--text-mid); font-weight: 600; line-height: 1.35; }
+
+.cat-section { margin-bottom: 28px; }
+.cat-scroll { display: flex; gap: 10px; flex-wrap: wrap; }
+.cat-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 30px;
+  padding: 8px 14px;
+  font-size: 0.83rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+.cat-chip:hover { border-color: var(--saffron); background: var(--saffron-light); color: var(--saffron-dark); }
+.cat-chip.active { border-color: var(--saffron); background: var(--saffron); color: white; }
+
+/* ── GAME ── */
+.game-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.back-btn {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+.back-btn:hover { border-color: var(--saffron); }
+.progress-track {
+  flex: 1;
+  background: var(--cream-dark);
+  border-radius: 8px;
+  height: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--saffron), #f5c060);
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+.progress-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.score-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+.score-item { text-align: center; }
+.score-num { font-size: 1.4rem; font-weight: 900; }
+.score-num.correct-c { color: var(--correct); }
+.score-num.wrong-c { color: var(--wrong); }
+.score-lbl { font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* Question card */
+.q-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px 22px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.q-mode-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  background: var(--cream-dark);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+}
+.q-emoji { font-size: 3.8rem; line-height: 1; }
+.q-tamil {
+  font-family: var(--font-tamil);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.q-roman {
+  font-size: 1rem;
+  color: var(--saffron-dark);
+  font-weight: 700;
+  font-style: italic;
+}
+.q-en { font-size: 0.85rem; color: var(--text-mid); font-weight: 600; }
+.q-script-note {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  background: var(--teal-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+/* Options */
+.options-grid {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.options-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.options-grid.cols-1 { grid-template-columns: 1fr; }
+
+.opt-btn {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 70px;
+  box-shadow: var(--shadow-sm);
+}
+.opt-btn:hover:not(:disabled) { border-color: var(--saffron); background: var(--saffron-light); transform: translateY(-1px); }
+.opt-btn:active:not(:disabled) { transform: scale(0.97); }
+.opt-btn.correct { border-color: var(--correct); background: var(--correct-bg); }
+.opt-btn.wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+.opt-btn:disabled { cursor: default; }
+.opt-tamil {
+  font-family: var(--font-tamil);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.opt-roman {
+  font-size: 0.72rem;
+  color: var(--saffron-dark);
+  font-weight: 700;
+  font-style: italic;
+}
+.opt-emoji { font-size: 1.7rem; }
+.opt-en { font-size: 0.75rem; color: var(--text-mid); font-weight: 600; }
+
+/* Feedback */
+.feedback-panel {
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  display: none;
+  animation: popIn 0.2s ease;
+}
+.feedback-panel.show { display: flex; align-items: flex-start; gap: 12px; }
+.feedback-panel.correct-fb { background: var(--correct-bg); border: 1.5px solid #9adcbc; }
+.feedback-panel.wrong-fb { background: var(--wrong-bg); border: 1.5px solid #f5aaaa; }
+.fb-icon { font-size: 1.4rem; flex-shrink: 0; }
+.fb-body { flex: 1; }
+.fb-title { font-size: 0.92rem; font-weight: 800; margin-bottom: 3px; }
+.fb-title.correct-fb { color: var(--teal-dark); }
+.fb-title.wrong-fb { color: var(--wrong); }
+.fb-tamil {
+  font-family: var(--font-tamil);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.fb-roman { font-size: 0.8rem; color: var(--saffron-dark); font-weight: 700; font-style: italic; margin-top: 1px; }
+.fb-detail { font-size: 0.8rem; color: var(--text-mid); font-weight: 600; margin-top: 2px; }
+.fb-example { font-size: 0.8rem; color: var(--teal); font-weight: 600; margin-top: 3px; font-style: italic; }
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.next-btn {
+  display: none;
+  width: 100%;
+  padding: 15px;
+  background: var(--saffron);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 4px 12px rgba(232,131,10,0.32);
+}
+.next-btn:hover { background: var(--saffron-dark); }
+.next-btn.show { display: block; animation: fadeUp 0.2s ease; }
+
+/* ── MATCH ── */
+.match-intro {
+  text-align: center;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 14px;
+  background: var(--cream-dark);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+.match-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.match-col { display: flex; flex-direction: column; gap: 8px; }
+.match-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  box-shadow: var(--shadow-sm);
+}
+.match-card:hover:not(.disabled) { border-color: var(--saffron); background: var(--saffron-light); }
+.match-card.selected { border-color: var(--saffron); background: var(--saffron-light); transform: scale(1.02); }
+.match-card.matched { border-color: var(--correct); background: var(--correct-bg); opacity: 0.7; pointer-events: none; }
+.match-card.wrong-flash { border-color: var(--wrong); background: var(--wrong-bg); animation: shake 0.3s ease; }
+.match-card .mc-emoji { font-size: 1.7rem; }
+.match-card .mc-tamil { font-family: var(--font-tamil); font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.match-card .mc-roman { font-size: 0.68rem; color: var(--saffron-dark); font-weight: 700; font-style: italic; }
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* ── SENTENCE ── */
+.sentence-clue {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  margin-bottom: 14px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+.clue-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 10px; }
+.clue-emojis { font-size: 2.6rem; }
+.clue-hint { font-size: 0.82rem; color: var(--text-mid); font-weight: 600; margin-top: 8px; }
+
+.sentence-drop {
+  background: var(--cream-dark);
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  min-height: 64px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.sentence-drop.has-words { border-color: var(--saffron); border-style: solid; background: var(--saffron-light); }
+.drop-placeholder { color: var(--text-dim); font-size: 0.83rem; font-weight: 600; }
+
+.tile-pool { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.word-tile {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.word-tile:hover { border-color: var(--saffron); background: var(--saffron-light); transform: translateY(-1px); }
+.tile-tamil { font-family: var(--font-tamil); font-size: 1rem; font-weight: 700; color: var(--text); }
+.tile-roman { font-size: 0.65rem; color: var(--saffron-dark); font-weight: 700; font-style: italic; }
+.word-tile.in-drop { background: var(--saffron); border-color: var(--saffron-dark); }
+.word-tile.in-drop .tile-tamil { color: white; }
+.word-tile.in-drop .tile-roman { color: rgba(255,255,255,0.8); }
+.word-tile.correct-tile { background: var(--correct-bg); border-color: var(--correct); }
+.word-tile.wrong-tile { background: var(--wrong-bg); border-color: var(--wrong); }
+
+.check-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: var(--teal);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 4px 12px rgba(26,138,122,0.28);
+  margin-bottom: 10px;
+}
+.check-btn:hover { background: var(--teal-dark); }
+.check-btn:disabled { opacity: 0.45; cursor: default; }
+
+/* ── RESULTS ── */
+.results-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 20px;
+}
+.result-emoji { font-size: 4rem; margin-bottom: 12px; display: block; }
+.result-title { font-size: 1.7rem; font-weight: 900; margin-bottom: 6px; }
+.result-title-tamil { font-family: var(--font-tamil); font-size: 1.2rem; color: var(--saffron); margin-bottom: 6px; }
+.result-sub { font-size: 0.95rem; color: var(--text-mid); font-weight: 600; margin-bottom: 24px; }
+.result-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.stat-box { background: var(--cream-dark); border-radius: var(--radius-md); padding: 16px; }
+.stat-num { font-size: 2rem; font-weight: 900; color: var(--saffron); }
+.stat-label { font-size: 0.75rem; font-weight: 800; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+.action-btns { display: flex; flex-direction: column; gap: 10px; }
+.primary-btn {
+  padding: 14px;
+  background: var(--saffron);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 4px 12px rgba(232,131,10,0.3);
+}
+.primary-btn:hover { background: var(--saffron-dark); }
+.secondary-btn {
+  padding: 13px;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-mid);
+  font-family: var(--font);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.secondary-btn:hover { border-color: var(--saffron); color: var(--saffron-dark); }
+
+/* Script helper tip */
+.script-tip {
+  background: var(--teal-light);
+  border: 1.5px solid #9ad8d0;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--teal-dark);
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="app-header">
+    <div class="app-logo">
+      <div class="app-logo-tamil">தமிழ் கற்றல்</div>
+      <div class="app-logo-en">Learn Tamil</div>
+    </div>
+    <div class="streak-badge">🔥 <span id="streakCount">0</span> streak</div>
+  </div>
+
+  <!-- HOME -->
+  <div id="screenHome" class="screen active">
+    <div class="home-hero">
+      <div class="hero-title">Learn Tamil 🇮🇳</div>
+      <div class="hero-title-tamil">தமிழ் கற்போம்!</div>
+      <div class="hero-sub">Emojis + Tamil script = beginner-friendly fun</div>
+    </div>
+
+    <div class="script-tip">
+      💡 Each Tamil word shows <strong>pronunciation (roman)</strong> below it — no Tamil reading needed to start!
+    </div>
+
+    <div class="section-title">Pick a Mode</div>
+    <div class="mode-grid">
+      <div class="mode-card" onclick="startMode('emojiToWord')">
+        <span class="mode-icon">😊→அ</span>
+        <div class="mode-name">Emoji Quiz</div>
+        <div class="mode-desc">See emoji, pick the Tamil word</div>
+      </div>
+      <div class="mode-card" onclick="startMode('wordToEmoji')">
+        <span class="mode-icon">அ→😊</span>
+        <div class="mode-name">Word Quiz</div>
+        <div class="mode-desc">See a Tamil word, pick the emoji</div>
+      </div>
+      <div class="mode-card" onclick="startMode('match')">
+        <span class="mode-icon">🃏🃏</span>
+        <div class="mode-name">Pair Match</div>
+        <div class="mode-desc">Match emojis to Tamil words</div>
+      </div>
+      <div class="mode-card" onclick="startMode('sentence')">
+        <span class="mode-icon">🧩✍️</span>
+        <div class="mode-name">Build It</div>
+        <div class="mode-desc">Arrange tiles to build a Tamil sentence</div>
+      </div>
+    </div>
+
+    <div class="cat-section">
+      <div class="section-title">Practice a Category</div>
+      <div class="cat-scroll" id="catChips"></div>
+    </div>
+  </div>
+
+  <!-- GAME -->
+  <div id="screenGame" class="screen">
+    <div class="game-top">
+      <button class="back-btn" onclick="goHome()">←</button>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="progress-label" id="progressLabel">0 / 0</div>
+    </div>
+    <div class="score-row">
+      <div class="score-item">
+        <div class="score-num correct-c" id="scoreCorrect">0</div>
+        <div class="score-lbl">Correct</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num wrong-c" id="scoreWrong">0</div>
+        <div class="score-lbl">Wrong</div>
+      </div>
+    </div>
+    <div id="gameArea"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="screenResults" class="screen">
+    <div class="results-card" id="resultsCard"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// DATA — Tamil vocabulary
+// Each item: emoji, en (English), ta (Tamil script),
+// rom (romanization), art (gender/case note), cat, phrase, phrase_en
+// ══════════════════════════════════════════════════════
+const VOCAB = [
+  // ANIMALS — விலங்குகள்
+  { emoji:'🐶', en:'dog',      ta:'நாய்',      rom:'nāy',        cat:'animals', phrase:'நாய் ஓடுகிறது.',       phrase_en:'The dog is running.',    phrase_rom:'Nāy ōḍugiṟatu.' },
+  { emoji:'🐱', en:'cat',      ta:'பூனை',      rom:'pūṇai',      cat:'animals', phrase:'பூனை தூங்குகிறது.',     phrase_en:'The cat is sleeping.',   phrase_rom:'Pūṇai tūṅgugiṟatu.' },
+  { emoji:'🐦', en:'bird',     ta:'பறவை',      rom:'paṟavai',    cat:'animals', phrase:'பறவை பறக்கிறது.',       phrase_en:'The bird is flying.',    phrase_rom:'Paṟavai paṟakkiṟatu.' },
+  { emoji:'🐟', en:'fish',     ta:'மீன்',       rom:'mīṉ',        cat:'animals', phrase:'மீன் நீந்துகிறது.',     phrase_en:'The fish is swimming.',  phrase_rom:'Mīṉ nīnthugiṟatu.' },
+  { emoji:'🐘', en:'elephant', ta:'யானை',      rom:'yāṉai',      cat:'animals', phrase:'யானை பெரியது.',         phrase_en:'The elephant is big.',   phrase_rom:'Yāṉai periyatu.' },
+  { emoji:'🐄', en:'cow',      ta:'பசு',       rom:'pasu',       cat:'animals', phrase:'பசு வயலில் இருக்கிறது.',phrase_en:'The cow is in the field.',phrase_rom:'Pasu vayalil irukkiṟatu.' },
+  { emoji:'🐒', en:'monkey',   ta:'குரங்கு',    rom:'kuraṅgu',    cat:'animals', phrase:'குரங்கு மரத்தில் ஏறுகிறது.',phrase_en:'The monkey climbs the tree.',phrase_rom:'Kuraṅgu marattil ēṟugiṟatu.' },
+  { emoji:'🐍', en:'snake',    ta:'பாம்பு',     rom:'pāmbu',      cat:'animals', phrase:'பாம்பு இருக்கிறது.',    phrase_en:'There is a snake.',      phrase_rom:'Pāmbu irukkiṟatu.' },
+  { emoji:'🦁', en:'lion',     ta:'சிங்கம்',    rom:'siṅgam',     cat:'animals', phrase:'சிங்கம் வலிமையானது.',   phrase_en:'The lion is powerful.',  phrase_rom:'Siṅgam valimāyāṉatu.' },
+  { emoji:'🐓', en:'rooster',  ta:'சேவல்',     rom:'sēval',      cat:'animals', phrase:'சேவல் கூவுகிறது.',      phrase_en:'The rooster is crowing.',phrase_rom:'Sēval kūvugiṟatu.' },
+
+  // FOOD — உணவு
+  { emoji:'🍚', en:'rice',     ta:'சோறு',      rom:'sōṟu',       cat:'food', phrase:'சோறு சாப்பிடுகிறேன்.',  phrase_en:'I am eating rice.',      phrase_rom:'Sōṟu sāppidugirēṉ.' },
+  { emoji:'🫓', en:'roti',     ta:'ரொட்டி',    rom:'roṭṭi',      cat:'food', phrase:'ரொட்டி சூடாக இருக்கு.',  phrase_en:'The roti is hot.',       phrase_rom:'Roṭṭi sūdāka irukku.' },
+  { emoji:'🍛', en:'curry',    ta:'கறி',       rom:'kaṟi',       cat:'food', phrase:'கறி மிகவும் சுவையாக இருக்கு.',phrase_en:'The curry is very tasty.',phrase_rom:'Kaṟi migavum suvaiyāga irukku.' },
+  { emoji:'🍌', en:'banana',   ta:'வாழைப்பழம்',rom:'vāḻaippaḻam',cat:'food', phrase:'வாழைப்பழம் மஞ்சளாக இருக்கு.',phrase_en:'The banana is yellow.',phrase_rom:'Vāḻaippaḻam mañjalāga irukku.' },
+  { emoji:'🥥', en:'coconut',  ta:'தேங்காய்',  rom:'tēṅkāy',    cat:'food', phrase:'தேங்காய் நல்லது.',        phrase_en:'Coconut is good.',       phrase_rom:'Tēṅkāy nallatu.' },
+  { emoji:'🌶️', en:'chilli',   ta:'மிளகாய்',   rom:'miḷakāy',   cat:'food', phrase:'மிளகாய் காரமாக இருக்கு.', phrase_en:'The chilli is spicy.',   phrase_rom:'Miḷakāy kāramāga irukku.' },
+  { emoji:'☕', en:'tea',      ta:'தேநீர்',    rom:'tēṉīr',     cat:'food', phrase:'தேநீர் குடிக்கிறேன்.',    phrase_en:'I am drinking tea.',     phrase_rom:'Tēṉīr kudikkirēṉ.' },
+  { emoji:'🥛', en:'milk',     ta:'பால்',      rom:'pāl',        cat:'food', phrase:'பால் குடிக்கிறேன்.',       phrase_en:'I am drinking milk.',    phrase_rom:'Pāl kudikkirēṉ.' },
+  { emoji:'🍯', en:'honey',    ta:'தேன்',      rom:'tēṉ',        cat:'food', phrase:'தேன் இனிமையாக இருக்கு.',  phrase_en:'Honey is sweet.',        phrase_rom:'Tēṉ iṉimāiyāga irukku.' },
+  { emoji:'🫘', en:'lentils',  ta:'பருப்பு',   rom:'paruppu',    cat:'food', phrase:'பருப்பு சுவையாக இருக்கு.', phrase_en:'The lentils are tasty.', phrase_rom:'Paruppu suvaiyāga irukku.' },
+
+  // HOME — வீடு
+  { emoji:'🏠', en:'house',    ta:'வீடு',      rom:'vīdu',       cat:'home', phrase:'வீடு பெரியது.',          phrase_en:'The house is big.',      phrase_rom:'Vīdu periyatu.' },
+  { emoji:'🛏️', en:'bed',      ta:'படுக்கை',   rom:'paḍukkai',   cat:'home', phrase:'படுக்கை மென்மையானது.',   phrase_en:'The bed is soft.',       phrase_rom:'Paḍukkai meṉmaiyāṉatu.' },
+  { emoji:'🪑', en:'chair',    ta:'நாற்காலி',  rom:'nāṟkāli',    cat:'home', phrase:'நாற்காலியில் அமர்கிறேன்.',phrase_en:'I sit on the chair.',    phrase_rom:'Nāṟkāliyil amarkirēṉ.' },
+  { emoji:'🚪', en:'door',     ta:'கதவு',      rom:'katavu',     cat:'home', phrase:'கதவை திறக்கிறேன்.',       phrase_en:'I open the door.',       phrase_rom:'Katavai tiṟakkirēṉ.' },
+  { emoji:'🪟', en:'window',   ta:'ஜன்னல்',    rom:'jaṉṉal',     cat:'home', phrase:'ஜன்னல் திறந்திருக்கு.',   phrase_en:'The window is open.',    phrase_rom:'Jaṉṉal tiṟantirukku.' },
+  { emoji:'💡', en:'light',    ta:'விளக்கு',   rom:'viḷakku',    cat:'home', phrase:'விளக்கு எரிகிறது.',       phrase_en:'The light is on.',       phrase_rom:'Viḷakku erikiṟatu.' },
+  { emoji:'🧹', en:'broom',    ta:'துடைப்பம்', rom:'tuḍaippam',  cat:'home', phrase:'துடைப்பத்தால் துடைக்கிறேன்.',phrase_en:'I sweep with the broom.',phrase_rom:'Tuḍaippatāl tuḍaikkirēṉ.' },
+  { emoji:'🛁', en:'bathroom', ta:'குளியலறை',  rom:'kuḷiyalaṟai',cat:'home', phrase:'குளியலறை சுத்தமாக இருக்கு.',phrase_en:'The bathroom is clean.',phrase_rom:'Kuḷiyalaṟai suttamāga irukku.' },
+  { emoji:'🔑', en:'key',      ta:'சாவி',      rom:'sāvi',       cat:'home', phrase:'சாவி மேசையில் இருக்கு.',   phrase_en:'The key is on the table.',phrase_rom:'Sāvi mēsaiyil irukku.' },
+  { emoji:'📺', en:'TV',       ta:'தொலைக்காட்சி',rom:'tolaikkāṭsi',cat:'home',phrase:'தொலைக்காட்சி பார்க்கிறேன்.',phrase_en:'I am watching TV.',   phrase_rom:'Tolaikkāṭsi pārkkirēṉ.' },
+
+  // FAMILY — குடும்பம்
+  { emoji:'👩', en:'mother',   ta:'அம்மா',     rom:'ammā',       cat:'family', phrase:'அம்மா சமைக்கிறாள்.',    phrase_en:'Mom is cooking.',        phrase_rom:'Ammā samaikkiṟāḷ.' },
+  { emoji:'👨', en:'father',   ta:'அப்பா',     rom:'appā',       cat:'family', phrase:'அப்பா வேலைக்கு போகிறார்.',phrase_en:'Dad is going to work.', phrase_rom:'Appā vēlaikku pōgiṟār.' },
+  { emoji:'👧', en:'sister',   ta:'அக்கா',     rom:'akkā',       cat:'family', phrase:'அக்கா படிக்கிறாள்.',      phrase_en:'Sister is studying.',    phrase_rom:'Akkā paḍikkirāḷ.' },
+  { emoji:'👦', en:'brother',  ta:'அண்ணா',     rom:'aṇṇā',       cat:'family', phrase:'அண்ணா விளையாடுகிறான்.',   phrase_en:'Brother is playing.',    phrase_rom:'Aṇṇā viḷaiyāḍugiṟāṉ.' },
+  { emoji:'👴', en:'grandfather',ta:'தாத்தா',  rom:'tāttā',      cat:'family', phrase:'தாத்தா வயதானவர்.',         phrase_en:'Grandfather is old.',    phrase_rom:'Tāttā vayatāṉavar.' },
+  { emoji:'👵', en:'grandmother',ta:'பாட்டி',  rom:'pāṭṭi',      cat:'family', phrase:'பாட்டி கதை சொல்கிறாள்.',  phrase_en:'Grandmother tells a story.',phrase_rom:'Pāṭṭi katai solgiṟāḷ.' },
+  { emoji:'👶', en:'baby',     ta:'குழந்தை',   rom:'kuḻantai',   cat:'family', phrase:'குழந்தை தூங்குகிறது.',    phrase_en:'The baby is sleeping.',  phrase_rom:'Kuḻantai tūṅgugiṟatu.' },
+  { emoji:'👫', en:'husband/wife',ta:'கணவன்/மனைவி',rom:'kaṇavaṉ/maṇaivi',cat:'family',phrase:'கணவன் மனைவி இருக்கிறார்கள்.',phrase_en:'Husband and wife are here.',phrase_rom:'Kaṇavaṉ maṇaivi irukkiṟārgaḷ.' },
+  { emoji:'🧑', en:'person',   ta:'நபர்',      rom:'napar',      cat:'family', phrase:'நபர் நல்லவர்.',           phrase_en:'The person is kind.',    phrase_rom:'Napar nallavar.' },
+  { emoji:'👱', en:'friend',   ta:'நண்பன்',    rom:'naṇpaṉ',     cat:'family', phrase:'நண்பன் வருகிறான்.',        phrase_en:'The friend is coming.',  phrase_rom:'Naṇpaṉ varugiṟāṉ.' },
+
+  // BODY — உடல்
+  { emoji:'👁️', en:'eye',      ta:'கண்',       rom:'kaṇ',        cat:'body', phrase:'கண் அழகாக இருக்கு.',     phrase_en:'The eye is beautiful.',  phrase_rom:'Kaṇ aḻagāga irukku.' },
+  { emoji:'👂', en:'ear',      ta:'காது',      rom:'kātu',       cat:'body', phrase:'காது கேட்கிறது.',          phrase_en:'The ear hears.',         phrase_rom:'Kātu kēṭkiṟatu.' },
+  { emoji:'👃', en:'nose',     ta:'மூக்கு',    rom:'mūkku',      cat:'body', phrase:'மூக்கு சிறியது.',           phrase_en:'The nose is small.',     phrase_rom:'Mūkku siriyatu.' },
+  { emoji:'👄', en:'mouth',    ta:'வாய்',      rom:'vāy',        cat:'body', phrase:'வாய் திறந்திருக்கு.',       phrase_en:'The mouth is open.',     phrase_rom:'Vāy tiṟantirukku.' },
+  { emoji:'✋', en:'hand',     ta:'கை',        rom:'kai',        cat:'body', phrase:'கை சுத்தமாக இருக்கு.',     phrase_en:'The hand is clean.',     phrase_rom:'Kai suttamāga irukku.' },
+  { emoji:'🦶', en:'foot',     ta:'கால்',      rom:'kāl',        cat:'body', phrase:'கால் வலிக்கிறது.',          phrase_en:'The foot hurts.',        phrase_rom:'Kāl valikkiratu.' },
+  { emoji:'❤️', en:'heart',    ta:'இதயம்',     rom:'itayam',     cat:'body', phrase:'இதயம் துடிக்கிறது.',       phrase_en:'The heart beats.',       phrase_rom:'Itayam tuḍikkiratu.' },
+  { emoji:'🧠', en:'brain',    ta:'மூளை',      rom:'mūḷai',      cat:'body', phrase:'மூளை சிந்திக்கிறது.',      phrase_en:'The brain thinks.',      phrase_rom:'Mūḷai sintikkiratu.' },
+  { emoji:'💪', en:'arm',      ta:'தோள்',      rom:'tōḷ',        cat:'body', phrase:'தோள் வலிமையானது.',         phrase_en:'The arm is strong.',     phrase_rom:'Tōḷ valimāyāṉatu.' },
+  { emoji:'🦷', en:'tooth',    ta:'பல்',       rom:'pal',        cat:'body', phrase:'பல் வலிக்கிறது.',           phrase_en:'The tooth hurts.',       phrase_rom:'Pal valikkiratu.' },
+
+  // WEATHER — வானிலை
+  { emoji:'☀️', en:'sun',      ta:'சூரியன்',   rom:'sūriyaṉ',    cat:'weather', phrase:'சூரியன் வெளிச்சமாக இருக்கு.',phrase_en:'The sun is bright.',  phrase_rom:'Sūriyaṉ veḷiccamāga irukku.' },
+  { emoji:'🌧️', en:'rain',     ta:'மழை',       rom:'maḻai',      cat:'weather', phrase:'மழை பெய்கிறது.',          phrase_en:'It is raining.',         phrase_rom:'Maḻai peygiṟatu.' },
+  { emoji:'💨', en:'wind',     ta:'காற்று',    rom:'kāṟṟu',      cat:'weather', phrase:'காற்று வீசுகிறது.',        phrase_en:'The wind is blowing.',   phrase_rom:'Kāṟṟu vīsugiṟatu.' },
+  { emoji:'⛅', en:'cloud',    ta:'மேகம்',     rom:'mēgam',      cat:'weather', phrase:'மேகம் இருக்கிறது.',        phrase_en:'There are clouds.',      phrase_rom:'Mēgam irukkiṟatu.' },
+  { emoji:'🌡️', en:'heat',     ta:'வெப்பம்',   rom:'veppam',     cat:'weather', phrase:'வெப்பம் அதிகமாக இருக்கு.', phrase_en:'It is very hot.',        phrase_rom:'Veppam atigamāga irukku.' },
+  { emoji:'🌊', en:'ocean',    ta:'கடல்',      rom:'kaḍal',      cat:'weather', phrase:'கடல் அழகாக இருக்கு.',     phrase_en:'The ocean is beautiful.',phrase_rom:'Kaḍal aḻagāga irukku.' },
+  { emoji:'⛈️', en:'storm',    ta:'புயல்',     rom:'puyal',      cat:'weather', phrase:'புயல் வருகிறது.',          phrase_en:'The storm is coming.',   phrase_rom:'Puyal varugiṟatu.' },
+  { emoji:'🌈', en:'rainbow',  ta:'வானவில்',   rom:'vāṉavil',    cat:'weather', phrase:'வானவில் அழகாக இருக்கு.',   phrase_en:'The rainbow is beautiful.',phrase_rom:'Vāṉavil aḻagāga irukku.' },
+  { emoji:'🌙', en:'moon',     ta:'நிலவு',     rom:'nilavu',     cat:'weather', phrase:'நிலவு அழகாக இருக்கு.',    phrase_en:'The moon is beautiful.', phrase_rom:'Nilavu aḻagāga irukku.' },
+  { emoji:'⭐', en:'star',     ta:'நட்சத்திரம்',rom:'naṭsattiram',cat:'weather',phrase:'நட்சத்திரம் ஒளிர்கிறது.',  phrase_en:'The star is shining.',   phrase_rom:'Naṭsattiram oḷirkiṟatu.' },
+
+  // TRANSPORT — போக்குவரத்து
+  { emoji:'🚗', en:'car',      ta:'கார்',      rom:'kār',        cat:'transport', phrase:'கார் வேகமாக செல்கிறது.',phrase_en:'The car goes fast.',     phrase_rom:'Kār vēgamāga selgiṟatu.' },
+  { emoji:'🚂', en:'train',    ta:'ரயில்',     rom:'rayil',      cat:'transport', phrase:'ரயில் வருகிறது.',         phrase_en:'The train is coming.',   phrase_rom:'Rayil varugiṟatu.' },
+  { emoji:'✈️', en:'plane',    ta:'விமானம்',   rom:'vimāṉam',    cat:'transport', phrase:'விமானம் பறக்கிறது.',      phrase_en:'The plane is flying.',   phrase_rom:'Vimāṉam paṟakkiṟatu.' },
+  { emoji:'🚢', en:'ship',     ta:'கப்பல்',    rom:'kappal',     cat:'transport', phrase:'கப்பல் கடலில் போகிறது.',  phrase_en:'The ship goes in the sea.',phrase_rom:'Kappal kaḍalil pōgiṟatu.' },
+  { emoji:'🚲', en:'bicycle',  ta:'சைக்கிள்',  rom:'saikkiḷ',    cat:'transport', phrase:'சைக்கிள் ஓட்டுகிறேன்.',  phrase_en:'I am cycling.',          phrase_rom:'Saikkiḷ ōṭṭugiṟēṉ.' },
+  { emoji:'🚌', en:'bus',      ta:'பேருந்து',  rom:'pērundu',    cat:'transport', phrase:'பேருந்தில் போகிறேன்.',     phrase_en:'I am going by bus.',     phrase_rom:'Pērundil pōgiṟēṉ.' },
+  { emoji:'🛺', en:'auto',     ta:'ஆட்டோ',    rom:'āṭṭō',       cat:'transport', phrase:'ஆட்டோவில் வருகிறேன்.',    phrase_en:'I am coming by auto.',   phrase_rom:'Āṭṭōvil varugiṟēṉ.' },
+  { emoji:'🚶', en:'walk',     ta:'நடக்கிறேன்',rom:'naḍakkirēṉ', cat:'transport', phrase:'நான் நடக்கிறேன்.',         phrase_en:'I am walking.',          phrase_rom:'Nāṉ naḍakkirēṉ.' },
+  { emoji:'🛵', en:'scooter',  ta:'ஸ்கூட்டர்', rom:'skūṭṭar',    cat:'transport', phrase:'ஸ்கூட்டர் ஓட்டுகிறேன்.',  phrase_en:'I am riding a scooter.', phrase_rom:'Skūṭṭar ōṭṭugiṟēṉ.' },
+  { emoji:'⛵', en:'boat',     ta:'படகு',      rom:'paḍagu',     cat:'transport', phrase:'படகில் செல்கிறோம்.',       phrase_en:'We are going by boat.',  phrase_rom:'Paḍagil selgiṟōm.' },
+
+  // EMOTIONS — உணர்வுகள்
+  { emoji:'😊', en:'happy',    ta:'மகிழ்ச்சி',  rom:'magiḻcci',   cat:'emotions', phrase:'நான் மகிழ்ச்சியாக இருக்கேன்.',phrase_en:'I am happy.',        phrase_rom:'Nāṉ magiḻcciyāga irukkēṉ.' },
+  { emoji:'😢', en:'sad',      ta:'சோகம்',     rom:'sōgam',      cat:'emotions', phrase:'எனக்கு சோகமாக இருக்கு.',  phrase_en:'I am sad.',              phrase_rom:'Eṉakku sōgamāga irukku.' },
+  { emoji:'😡', en:'angry',    ta:'கோபம்',     rom:'kōpam',      cat:'emotions', phrase:'எனக்கு கோபமாக இருக்கு.',   phrase_en:'I am angry.',            phrase_rom:'Eṉakku kōpamāga irukku.' },
+  { emoji:'😨', en:'scared',   ta:'பயம்',      rom:'payam',      cat:'emotions', phrase:'எனக்கு பயமாக இருக்கு.',    phrase_en:'I am scared.',           phrase_rom:'Eṉakku payamāga irukku.' },
+  { emoji:'😴', en:'sleepy',   ta:'தூக்கம்',   rom:'tūkkam',     cat:'emotions', phrase:'எனக்கு தூக்கம் வருகிறது.',  phrase_en:'I am feeling sleepy.',   phrase_rom:'Eṉakku tūkkam varugiṟatu.' },
+  { emoji:'🤩', en:'excited',  ta:'உற்சாகம்',  rom:'uṟcākam',    cat:'emotions', phrase:'எனக்கு உற்சாகமாக இருக்கு.', phrase_en:'I am excited.',          phrase_rom:'Eṉakku uṟcākamāga irukku.' },
+  { emoji:'😍', en:'love',     ta:'காதல்',     rom:'kātal',      cat:'emotions', phrase:'நான் உன்னை காதலிக்கிறேன்.',phrase_en:'I love you.',            phrase_rom:'Nāṉ uṉṉai kātalikirēṉ.' },
+  { emoji:'😆', en:'laughing', ta:'சிரிப்பு',  rom:'sirippu',    cat:'emotions', phrase:'சிரிப்பு நல்லது.',          phrase_en:'Laughter is good.',      phrase_rom:'Sirippu nallatu.' },
+  { emoji:'🥰', en:'warm',     ta:'அன்பு',     rom:'aṉpu',       cat:'emotions', phrase:'அன்பு மிகவும் நல்லது.',     phrase_en:'Love is very good.',     phrase_rom:'Aṉpu migavum nallatu.' },
+  { emoji:'😎', en:'cool',     ta:'கலக்கல்',   rom:'kalakkal',   cat:'emotions', phrase:'அது கலக்கல்!',              phrase_en:'That is cool!',          phrase_rom:'Atu kalakkal!' },
+
+  // ACTIONS — செயல்கள்
+  { emoji:'🏃', en:'run',      ta:'ஓடுகிறேன்', rom:'ōḍugiṟēṉ',   cat:'actions', phrase:'நான் வேகமாக ஓடுகிறேன்.',   phrase_en:'I run fast.',            phrase_rom:'Nāṉ vēgamāga ōḍugiṟēṉ.' },
+  { emoji:'🍽️', en:'eat',      ta:'சாப்பிடுகிறேன்',rom:'sāppiḍugiṟēṉ',cat:'actions',phrase:'நான் சாப்பிடுகிறேன்.',phrase_en:'I am eating.',           phrase_rom:'Nāṉ sāppiḍugiṟēṉ.' },
+  { emoji:'💤', en:'sleep',    ta:'தூங்குகிறேன்',rom:'tūṅgugiṟēṉ', cat:'actions', phrase:'நான் தூங்குகிறேன்.',         phrase_en:'I am sleeping.',         phrase_rom:'Nāṉ tūṅgugiṟēṉ.' },
+  { emoji:'📚', en:'study',    ta:'படிக்கிறேன்',rom:'paḍikkirēṉ',  cat:'actions', phrase:'நான் படிக்கிறேன்.',          phrase_en:'I am studying.',         phrase_rom:'Nāṉ paḍikkirēṉ.' },
+  { emoji:'✍️', en:'write',    ta:'எழுதுகிறேன்',rom:'eḻutugiṟēṉ',  cat:'actions', phrase:'நான் எழுதுகிறேன்.',          phrase_en:'I am writing.',          phrase_rom:'Nāṉ eḻutugiṟēṉ.' },
+  { emoji:'🎵', en:'sing',     ta:'பாடுகிறேன்', rom:'pāḍugiṟēṉ',   cat:'actions', phrase:'நான் பாடுகிறேன்.',           phrase_en:'I am singing.',          phrase_rom:'Nāṉ pāḍugiṟēṉ.' },
+  { emoji:'💃', en:'dance',    ta:'ஆடுகிறேன்',  rom:'āḍugiṟēṉ',    cat:'actions', phrase:'நான் ஆடுகிறேன்.',            phrase_en:'I am dancing.',          phrase_rom:'Nāṉ āḍugiṟēṉ.' },
+  { emoji:'🗣️', en:'speak',    ta:'பேசுகிறேன்', rom:'pēsugiṟēṉ',   cat:'actions', phrase:'தமிழில் பேசுகிறேன்.',       phrase_en:'I am speaking in Tamil.',phrase_rom:'Tamiḻil pēsugiṟēṉ.' },
+  { emoji:'🛒', en:'buy',      ta:'வாங்குகிறேன்',rom:'vāṅgugiṟēṉ',  cat:'actions', phrase:'காய்கறி வாங்குகிறேன்.',     phrase_en:'I am buying vegetables.',phrase_rom:'Kāykaṟi vāṅgugiṟēṉ.' },
+  { emoji:'👀', en:'see',      ta:'பார்க்கிறேன்',rom:'pārkkirēṉ',   cat:'actions', phrase:'நான் பார்க்கிறேன்.',         phrase_en:'I am looking.',          phrase_rom:'Nāṉ pārkkirēṉ.' },
+];
+
+const SENTENCES = [
+  { clue:'🐶🏃', en:'The dog is running.', ta:'நாய் ஓடுகிறது.',   tiles:[{t:'நாய்',r:'Nāy'},{t:'ஓடுகிறது.',r:'ōḍugiṟatu.'},{t:'தூங்குகிறது.',r:'tūṅgugiṟatu.'},{t:'பூனை',r:'Pūṇai'}], answer:'நாய் ஓடுகிறது.' },
+  { clue:'👩☕', en:'Mom is drinking tea.', ta:'அம்மா தேநீர் குடிக்கிறாள்.', tiles:[{t:'அம்மா',r:'Ammā'},{t:'தேநீர்',r:'tēṉīr'},{t:'குடிக்கிறாள்.',r:'kuḍikkirāḷ.'},{t:'சாப்பிடுகிறாள்.',r:'sāppiḍugiṟāḷ.'},{t:'அப்பா',r:'Appā'}], answer:'அம்மா தேநீர் குடிக்கிறாள்.' },
+  { clue:'☀️🌡️', en:'The sun is hot.', ta:'சூரியன் வெப்பமாக இருக்கு.', tiles:[{t:'சூரியன்',r:'Sūriyaṉ'},{t:'வெப்பமாக',r:'veppamāga'},{t:'இருக்கு.',r:'irukku.'},{t:'குளிர்மையாக',r:'kuḷirmāyāga'},{t:'மழை',r:'maḻai'}], answer:'சூரியன் வெப்பமாக இருக்கு.' },
+  { clue:'🐱💤', en:'The cat is sleeping.', ta:'பூனை தூங்குகிறது.', tiles:[{t:'பூனை',r:'Pūṇai'},{t:'தூங்குகிறது.',r:'tūṅgugiṟatu.'},{t:'ஓடுகிறது.',r:'ōḍugiṟatu.'},{t:'நாய்',r:'Nāy'},{t:'சாப்பிடுகிறது.',r:'sāppiḍugiṟatu.'}], answer:'பூனை தூங்குகிறது.' },
+  { clue:'🌧️💨', en:'It is raining.', ta:'மழை பெய்கிறது.', tiles:[{t:'மழை',r:'Maḻai'},{t:'பெய்கிறது.',r:'peygiṟatu.'},{t:'வீசுகிறது.',r:'vīsugiṟatu.'},{t:'காற்று',r:'kāṟṟu'},{t:'சூரியன்',r:'Sūriyaṉ'}], answer:'மழை பெய்கிறது.' },
+  { clue:'👦📚', en:'Brother is studying.', ta:'அண்ணா படிக்கிறான்.', tiles:[{t:'அண்ணா',r:'Aṇṇā'},{t:'படிக்கிறான்.',r:'paḍikkirāṉ.'},{t:'விளையாடுகிறான்.',r:'viḷaiyāḍugiṟāṉ.'},{t:'அக்கா',r:'Akkā'},{t:'ஓடுகிறான்.',r:'ōḍugiṟāṉ.'}], answer:'அண்ணா படிக்கிறான்.' },
+  { clue:'🚗💨', en:'The car goes fast.', ta:'கார் வேகமாக செல்கிறது.', tiles:[{t:'கார்',r:'Kār'},{t:'வேகமாக',r:'vēgamāga'},{t:'செல்கிறது.',r:'selgiṟatu.'},{t:'மெதுவாக',r:'metuvāga'},{t:'ரயில்',r:'rayil'}], answer:'கார் வேகமாக செல்கிறது.' },
+  { clue:'👵🍯', en:'Grandmother likes honey.', ta:'பாட்டி தேன் விரும்புகிறாள்.', tiles:[{t:'பாட்டி',r:'Pāṭṭi'},{t:'தேன்',r:'tēṉ'},{t:'விரும்புகிறாள்.',r:'virumbugiṟāḷ.'},{t:'வாங்குகிறாள்.',r:'vāṅgugiṟāḷ.'},{t:'தாத்தா',r:'Tāttā'}], answer:'பாட்டி தேன் விரும்புகிறாள்.' },
+  { clue:'😊❤️', en:'Love is good.', ta:'அன்பு நல்லது.', tiles:[{t:'அன்பு',r:'Aṉpu'},{t:'நல்லது.',r:'nallatu.'},{t:'கஷ்டமானது.',r:'kaṣṭamāṉatu.'},{t:'மகிழ்ச்சி',r:'magiḻcci'},{t:'சோகம்',r:'sōgam'}], answer:'அன்பு நல்லது.' },
+  { clue:'🌊⛵', en:'The boat is in the sea.', ta:'படகு கடலில் இருக்கிறது.', tiles:[{t:'படகு',r:'Paḍagu'},{t:'கடலில்',r:'kaḍalil'},{t:'இருக்கிறது.',r:'irukkiṟatu.'},{t:'வானத்தில்',r:'vāṉattil'},{t:'விமானம்',r:'vimāṉam'}], answer:'படகு கடலில் இருக்கிறது.' },
+];
+
+const CATEGORIES = [
+  { id:'animals',   label:'Animals',   emoji:'🐾',  ta:'விலங்கு' },
+  { id:'food',      label:'Food',      emoji:'🍽️',  ta:'உணவு' },
+  { id:'home',      label:'Home',      emoji:'🏠',  ta:'வீடு' },
+  { id:'family',    label:'Family',    emoji:'👨‍👩‍👧', ta:'குடும்பம்' },
+  { id:'body',      label:'Body',      emoji:'🫀',  ta:'உடல்' },
+  { id:'weather',   label:'Weather',   emoji:'🌤️',  ta:'வானிலை' },
+  { id:'transport', label:'Transport', emoji:'🚗',  ta:'போக்குவரத்து' },
+  { id:'emotions',  label:'Emotions',  emoji:'😊',  ta:'உணர்வு' },
+  { id:'actions',   label:'Actions',   emoji:'🏃',  ta:'செயல்' },
+];
+
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+let G = {
+  mode: null, cat: null,
+  questions: [], current: 0,
+  correct: 0, wrong: 0, streak: 0, totalStreak: 0,
+  matchSel: { id: null, pair: null, side: null },
+  matchMatched: 0, matchTotal: 0,
+  sentenceDrop: [], sentenceTiles: [],
+};
+
+// ══════════════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════════════
+const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
+const pick = (arr, n) => shuffle(arr).slice(0, n);
+const $ = id => document.getElementById(id);
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+
+// ══════════════════════════════════════════════════════
+// HOME INIT
+// ══════════════════════════════════════════════════════
+function initHome() {
+  $('catChips').innerHTML =
+    `<div class="cat-chip active" onclick="selectCat(this,'')">✨ All Topics</div>` +
+    CATEGORIES.map(c =>
+      `<div class="cat-chip" onclick="selectCat(this,'${c.id}')">
+        ${c.emoji} <span style="font-family:var(--font-tamil);font-size:0.85rem;">${c.ta}</span>
+      </div>`
+    ).join('');
+}
+
+function selectCat(el, cat) {
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  G.cat = cat || null;
+}
+
+function goHome() { show('screenHome'); }
+
+// ══════════════════════════════════════════════════════
+// START MODE
+// ══════════════════════════════════════════════════════
+function startMode(mode) {
+  G.mode = mode; G.current = 0; G.correct = 0; G.wrong = 0;
+  $('scoreCorrect').textContent = '0';
+  $('scoreWrong').textContent = '0';
+
+  const pool = G.cat ? VOCAB.filter(v => v.cat === G.cat) : VOCAB;
+
+  if (mode === 'sentence') {
+    G.questions = shuffle(SENTENCES).slice(0, 6).map(s => ({ type:'sentence', ...s }));
+  } else if (mode === 'match') {
+    G.questions = [{ type:'match', pool: pick(pool, 6) }];
+  } else {
+    G.questions = pick(pool, 10).map(item => ({
+      type: mode, item,
+      options: shuffle([item, ...pick(pool.filter(v => v.ta !== item.ta), 3)]),
+    }));
+  }
+  show('screenGame');
+  renderQuestion();
+}
+
+// ══════════════════════════════════════════════════════
+// PROGRESS
+// ══════════════════════════════════════════════════════
+function updateProgress() {
+  const total = G.questions.length;
+  const pct = total > 0 ? (G.current / total) * 100 : 0;
+  $('progressFill').style.width = pct + '%';
+  $('progressLabel').textContent = G.current + ' / ' + total;
+}
+
+// ══════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════
+function renderQuestion() {
+  updateProgress();
+  const q = G.questions[G.current];
+  if (!q) { showResults(); return; }
+  if (q.type === 'match') renderMatch(q);
+  else if (q.type === 'sentence') renderSentence(q);
+  else if (q.type === 'emojiToWord') renderEmojiToWord(q);
+  else if (q.type === 'wordToEmoji') renderWordToEmoji(q);
+}
+
+// ── EMOJI → TAMIL WORD ──
+function renderEmojiToWord(q) {
+  $('gameArea').innerHTML = `
+    <div class="q-card">
+      <div class="q-mode-label">What is this in Tamil?</div>
+      <div class="q-emoji">${q.item.emoji}</div>
+      <div class="q-en">${q.item.en}</div>
+    </div>
+    <div class="options-grid cols-2" id="optGrid">
+      ${q.options.map(o => `
+        <button class="opt-btn" onclick="answerQuiz('${o.ta}','${q.item.ta}',this)">
+          <span class="opt-tamil">${o.ta}</span>
+          <span class="opt-roman">${o.rom}</span>
+        </button>`).join('')}
+    </div>
+    <div class="feedback-panel" id="fbPanel"></div>
+    <button class="next-btn" id="nextBtn" onclick="nextQ()">Next →</button>`;
+}
+
+// ── TAMIL WORD → EMOJI ──
+function renderWordToEmoji(q) {
+  $('gameArea').innerHTML = `
+    <div class="q-card">
+      <div class="q-mode-label">Pick the matching emoji</div>
+      <div class="q-tamil">${q.item.ta}</div>
+      <div class="q-roman">${q.item.rom}</div>
+      <div class="q-en">${q.item.en}</div>
+    </div>
+    <div class="options-grid cols-2" id="optGrid">
+      ${q.options.map(o => `
+        <button class="opt-btn" onclick="answerQuiz('${o.ta}','${q.item.ta}',this)">
+          <span class="opt-emoji">${o.emoji}</span>
+          <span class="opt-en">${o.en}</span>
+        </button>`).join('')}
+    </div>
+    <div class="feedback-panel" id="fbPanel"></div>
+    <button class="next-btn" id="nextBtn" onclick="nextQ()">Next →</button>`;
+}
+
+function answerQuiz(chosen, correct, btn) {
+  document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+  const isOk = chosen === correct;
+  btn.classList.add(isOk ? 'correct' : 'wrong');
+  isOk ? (G.correct++, G.streak++, G.totalStreak = Math.max(G.totalStreak, G.streak))
+        : (G.wrong++, G.streak = 0);
+  $('scoreCorrect').textContent = G.correct;
+  $('scoreWrong').textContent = G.wrong;
+  $('streakCount').textContent = G.streak;
+  showFeedback(isOk, correct);
+  const nb = $('nextBtn'); if (nb) nb.classList.add('show');
+}
+
+function showFeedback(isOk, correctTa) {
+  const item = VOCAB.find(v => v.ta === correctTa);
+  const panel = $('fbPanel');
+  if (!panel || !item) return;
+  panel.className = `feedback-panel show ${isOk ? 'correct-fb' : 'wrong-fb'}`;
+  panel.innerHTML = `
+    <span class="fb-icon">${isOk ? '✅' : '❌'}</span>
+    <div class="fb-body">
+      <div class="fb-title ${isOk ? 'correct-fb' : 'wrong-fb'}">${isOk ? 'Correct! 🎉' : 'Not quite…'}</div>
+      <div class="fb-tamil">${item.emoji} ${item.ta}</div>
+      <div class="fb-roman">${item.rom} = ${item.en}</div>
+      ${item.phrase ? `<div class="fb-example">${item.phrase} — ${item.phrase_en}</div>` : ''}
+    </div>`;
+}
+
+// ── MATCH ──
+function renderMatch(q) {
+  const pool = q.pool;
+  const left = shuffle(pool).map((v, i) => ({ id:'L'+i, pair:v.ta, show:v.emoji }));
+  const right = shuffle(pool).map((v, i) => ({ id:'R'+i, pair:v.ta, show:v.ta, rom:v.rom }));
+  G.matchSel = { id:null, pair:null, side:null };
+  G.matchMatched = 0; G.matchTotal = pool.length;
+
+  $('gameArea').innerHTML = `
+    <div class="match-intro">Match each emoji to its Tamil word — tap one from each column</div>
+    <div class="match-board">
+      <div class="match-col" id="matchLeft">
+        ${left.map(it => `
+          <div class="match-card" id="${it.id}" onclick="matchTap('${it.id}','${it.pair}','left')">
+            <span class="mc-emoji">${it.show}</span>
+          </div>`).join('')}
+      </div>
+      <div class="match-col" id="matchRight">
+        ${right.map(it => `
+          <div class="match-card" id="${it.id}" onclick="matchTap('${it.id}','${it.pair}','right')">
+            <div class="mc-tamil">${it.show}</div>
+            <div class="mc-roman">${it.rom}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="feedback-panel" id="fbPanel"></div>`;
+}
+
+function matchTap(id, pair, side) {
+  const card = $(id);
+  if (!card || card.classList.contains('matched') || card.classList.contains('disabled')) return;
+  const sel = G.matchSel;
+
+  if (sel.id && sel.side === side) {
+    $(sel.id).classList.remove('selected');
+    G.matchSel = { id, pair, side };
+    card.classList.add('selected');
+    return;
+  }
+  if (sel.id && sel.side !== side) {
+    if (sel.pair === pair) {
+      $(sel.id).classList.add('matched');
+      card.classList.add('matched');
+      G.matchMatched++;
+      G.correct++; G.streak++;
+      G.totalStreak = Math.max(G.totalStreak, G.streak);
+      $('scoreCorrect').textContent = G.correct;
+      $('streakCount').textContent = G.streak;
+      G.matchSel = { id:null, pair:null, side:null };
+      if (G.matchMatched >= G.matchTotal) {
+        setTimeout(() => {
+          const p = $('fbPanel');
+          if (p) { p.className='feedback-panel show correct-fb'; p.innerHTML='<span class="fb-icon">🎉</span><div class="fb-body"><div class="fb-title correct-fb">All matched! நல்லது!</div></div>'; }
+          setTimeout(nextQ, 1200);
+        }, 400);
+      }
+    } else {
+      const prev = $(sel.id);
+      prev.classList.add('wrong-flash'); card.classList.add('wrong-flash');
+      G.wrong++; G.streak = 0;
+      $('scoreWrong').textContent = G.wrong;
+      $('streakCount').textContent = G.streak;
+      setTimeout(() => {
+        prev.classList.remove('wrong-flash','selected');
+        card.classList.remove('wrong-flash','selected');
+      }, 500);
+      G.matchSel = { id:null, pair:null, side:null };
+    }
+    return;
+  }
+  card.classList.add('selected');
+  G.matchSel = { id, pair, side };
+}
+
+// ── SENTENCE BUILDER ──
+function renderSentence(q) {
+  G.sentenceTiles = shuffle(q.tiles);
+  G.sentenceDrop = [];
+
+  $('gameArea').innerHTML = `
+    <div class="sentence-clue">
+      <div class="clue-label">Build this sentence</div>
+      <div class="clue-emojis">${q.clue}</div>
+      <div class="clue-hint">${q.en}</div>
+    </div>
+    <div class="sentence-drop" id="sentDrop">
+      <span class="drop-placeholder">Tap words below to build the sentence…</span>
+    </div>
+    <div class="tile-pool" id="tilePool">
+      ${G.sentenceTiles.map((t, i) => `
+        <div class="word-tile" id="tile_${i}" onclick="tileTap(${i})">
+          <span class="tile-tamil">${t.t}</span>
+          <span class="tile-roman">${t.r}</span>
+        </div>`).join('')}
+    </div>
+    <button class="check-btn" id="checkBtn" onclick="checkSentence('${q.answer.replace(/'/g,"\\'")}','${q.ta.replace(/'/g,"\\'")}','${q.en}')" disabled>✓ Check Answer</button>
+    <div class="feedback-panel" id="fbPanel"></div>
+    <button class="next-btn" id="nextBtn" onclick="nextQ()">Next →</button>`;
+}
+
+function tileTap(idx) {
+  const tile = $('tile_' + idx);
+  if (!tile) return;
+  const tileData = G.sentenceTiles[idx];
+  if (tile.classList.contains('in-drop')) {
+    G.sentenceDrop = G.sentenceDrop.filter(t => t.idx !== idx);
+    tile.classList.remove('in-drop');
+  } else {
+    G.sentenceDrop.push({ idx, ...tileData });
+    tile.classList.add('in-drop');
+  }
+  updateDrop();
+}
+
+function updateDrop() {
+  const drop = $('sentDrop');
+  const btn = $('checkBtn');
+  if (G.sentenceDrop.length === 0) {
+    drop.innerHTML = '<span class="drop-placeholder">Tap words below to build the sentence…</span>';
+    drop.classList.remove('has-words');
+    if (btn) btn.disabled = true;
+  } else {
+    drop.classList.add('has-words');
+    drop.innerHTML = G.sentenceDrop.map(t =>
+      `<div class="word-tile in-drop" onclick="tileTap(${t.idx})">
+        <span class="tile-tamil">${t.t}</span>
+        <span class="tile-roman">${t.r}</span>
+      </div>`
+    ).join('');
+    if (btn) btn.disabled = false;
+  }
+}
+
+function checkSentence(correct, correctTa, correctEn) {
+  const built = G.sentenceDrop.map(t => t.t).join(' ');
+  const isOk = built.trim() === correct.trim();
+  document.querySelectorAll('.word-tile').forEach(t => {
+    t.onclick = null;
+    if (t.classList.contains('in-drop')) t.classList.add(isOk ? 'correct-tile' : 'wrong-tile');
+  });
+  const btn = $('checkBtn'); if (btn) btn.disabled = true;
+  isOk ? (G.correct++, G.streak++) : (G.wrong++, G.streak = 0);
+  $('scoreCorrect').textContent = G.correct;
+  $('scoreWrong').textContent = G.wrong;
+  $('streakCount').textContent = G.streak;
+  const p = $('fbPanel');
+  if (p) {
+    p.className = `feedback-panel show ${isOk ? 'correct-fb' : 'wrong-fb'}`;
+    p.innerHTML = `
+      <span class="fb-icon">${isOk ? '✅' : '❌'}</span>
+      <div class="fb-body">
+        <div class="fb-title ${isOk ? 'correct-fb' : 'wrong-fb'}">${isOk ? 'Perfect! 🎉' : 'Here\'s the answer:'}</div>
+        <div class="fb-tamil">${correctTa}</div>
+        <div class="fb-detail">${correctEn}</div>
+      </div>`;
+  }
+  const nb = $('nextBtn'); if (nb) nb.classList.add('show');
+}
+
+// ══════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════
+function nextQ() {
+  G.current++;
+  if (G.current >= G.questions.length) showResults();
+  else { renderQuestion(); updateProgress(); }
+}
+
+// ══════════════════════════════════════════════════════
+// RESULTS
+// ══════════════════════════════════════════════════════
+function showResults() {
+  updateProgress();
+  const total = G.correct + G.wrong;
+  const pct = total > 0 ? Math.round((G.correct / total) * 100) : 0;
+  const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '⭐' : pct >= 50 ? '📚' : '💪';
+  const title = pct >= 90 ? 'Superb!' : pct >= 70 ? 'Well done!' : pct >= 50 ? 'Keep going!' : 'Good try!';
+  const titleTa = pct >= 90 ? 'அருமை!' : pct >= 70 ? 'நல்லது!' : pct >= 50 ? 'தொடருங்கள்!' : 'முயற்சி நல்லது!';
+
+  $('resultsCard').innerHTML = `
+    <span class="result-emoji">${emoji}</span>
+    <div class="result-title">${title}</div>
+    <div class="result-title-tamil">${titleTa}</div>
+    <div class="result-sub">You answered ${G.correct} of ${total} correctly (${pct}%)</div>
+    <div class="result-stats">
+      <div class="stat-box"><div class="stat-num">${G.correct}</div><div class="stat-label">Correct</div></div>
+      <div class="stat-box"><div class="stat-num">${pct}%</div><div class="stat-label">Score</div></div>
+      <div class="stat-box"><div class="stat-num">${G.wrong}</div><div class="stat-label">Wrong</div></div>
+      <div class="stat-box"><div class="stat-num">${G.totalStreak}</div><div class="stat-label">Best Streak</div></div>
+    </div>
+    <div class="action-btns">
+      <button class="primary-btn" onclick="startMode('${G.mode}')">Play Again</button>
+      <button class="secondary-btn" onclick="goHome()">Choose Another Mode</button>
+    </div>`;
+  show('screenResults');
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+initHome();
+</script>
+</body>
+</html>
